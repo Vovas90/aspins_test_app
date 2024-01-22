@@ -14,6 +14,7 @@ class UsersCubit extends Cubit<UsersState> {
     emit(state.copyWith(isLoading: true));
 
     final allUsersList = await _usersApi.fetchUsers();
+    allUsersList.sort((a, b) => b.price.compareTo(a.price));
 
     final topUsersList = allUsersList.getRange(0, 3).toList();
     final usersList = allUsersList.getRange(3, allUsersList.length).toList();
